@@ -16,7 +16,9 @@ public class LoginWorkflowTests {
     public void usersCanLogInWithoutJavaScript() throws InterruptedException {
         WebEnvironment environment = WebEnvironment.getInstance();
         
-		HomePage page = environment.navigate(To.homePage()).responsePage(HomePage.class);
+		HomePage page = environment
+                .navigate(To.homePage())
+                .responsePage(HomePage.class);
 
         assertThat(page.getTitle(), is("Home - bvira"));
 

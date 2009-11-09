@@ -10,14 +10,14 @@ import org.jdom.xpath.XPath;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
 
 public class SimpleLoginAcceptanceTests {
     @Test
-    public void loginTitleIsAppropriate() throws JDOMException {
-        WebApplication application = new WebApplication();
+    public void loginTitleIsAppropriate() throws JDOMException, IOException {
         RequestContext requestContext = new RequestContext() {
             public ContextRoot getContextRoot() {
                 return null;
@@ -54,16 +54,12 @@ public class SimpleLoginAcceptanceTests {
             }
         };
 
+        WebApplication application = new WebApplication();
         application.executePresenter(requestContext, responseContext);
-
 
         SAXBuilder builder = new SAXBuilder();
         Document document;
-        try {
-            document = builder.build(new StringReader(writer.toString()));
-        } catch (Exception e) {
-            throw new RuntimeException(("failure when trying to parse page in " + this.getClass().getName()), e);
-        }
+        document = builder.build(new StringReader(writer.toString()));
 
 
         Element node = (Element) XPath.selectSingleNode(document.getRootElement(), "//title");

@@ -14,14 +14,18 @@ import org.openqa.selenium.WebElement;
 public class LoginAcceptanceTests {
     @Test
     public void loginTitleIsAppropriate() {
-        LoginPage page = WebEnvironment.getInstance().navigate(To.loginPage()).responsePage(LoginPage.class);
+        LoginPage page = WebEnvironment.getInstance()
+                .navigate(To.loginPage())
+                .responsePage(LoginPage.class);
 
         assertThat(page.getTitle(), is("Login - bvira"));
     }
 
     @Test
     public void loginPageContainsUsernameAndPasswordFields() {
-        LoginPage page = WebEnvironment.getInstance().navigate(To.loginPage()).responsePage(LoginPage.class);
+        LoginPage page = WebEnvironment.getInstance()
+                .navigate(To.loginPage())
+                .responsePage(LoginPage.class);
 
         WebElement username = page.username();
         assertThat(username.getAttribute("name"), is("username"));

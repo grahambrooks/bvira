@@ -21,7 +21,8 @@ public class OfficeDetailsWorkflowTests {
         environment.clearHttpInteractionLog();
         environment.navigate(To.path("/office/details"));
 
-        List<HTTPInteraction> interactions = environment.findHttpInteractions(For.domain("www.google.com"));
+        List<HTTPInteraction> interactions = environment
+                .findHttpInteractions(For.domain("www.google.com"));
 
         assertThat(interactions.size(), is(4));
     }
