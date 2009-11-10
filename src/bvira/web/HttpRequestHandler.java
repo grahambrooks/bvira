@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class HttpRequestHandler extends HttpServlet {
-
-    private WebApplication application;
+	private static final long serialVersionUID = 1L;
+	private WebApplication application;
 
     public void init(ServletConfig servletConfig) throws ServletException {
         super.init(servletConfig);

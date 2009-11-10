@@ -69,9 +69,6 @@ public class WorkflowTestWebEnvironment extends WebEnvironment implements Closea
             public void log(String s) {
             }
 
-            public void setVerbose() {
-            }
-
             public void trace(String s) {
             }
         };
