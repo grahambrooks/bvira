@@ -1,4 +1,6 @@
-package bvira.web;
+package bvira.model;
+
+import bvira.web.TemplateWriter;
 
 import java.io.PrintWriter;
 

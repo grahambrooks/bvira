@@ -3,7 +3,7 @@ package bvira.web;
 import bvira.components.HomePageComponent;
 import bvira.components.LoginComponent;
 import bvira.components.OfficeComponent;
-import bvira.model.Component;
+import bvira.model.*;
 import bvira.util.Container;
 import bvira.persistance.StubOfficeFinder;
 

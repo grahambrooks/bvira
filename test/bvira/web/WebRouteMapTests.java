@@ -1,5 +1,8 @@
 package bvira.web;
 
+import bvira.model.Presenter;
+import bvira.model.RequestContext;
+import bvira.model.ResponseContext;
 import org.junit.Assert;
 import org.junit.Test;
 

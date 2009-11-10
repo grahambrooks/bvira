@@ -1,6 +1,7 @@
 package bvira.test;
 
 import bvira.model.Field;
+import bvira.model.ResponseContext;
 import bvira.test.abstraction.DriverAdaptor;
 import bvira.test.abstraction.For;
 import bvira.test.abstraction.HtmlPage;
@@ -10,9 +11,8 @@ import bvira.test.abstraction.To;
 import bvira.web.ContextPath;
 import bvira.web.ContextRoot;
 import bvira.web.Parameters;
-import bvira.web.RequestContext;
+import bvira.model.RequestContext;
 import bvira.web.RequestUri;
-import bvira.web.ResponseContext;
 import bvira.web.TemplateWriter;
 import bvira.web.WebApplication;
 

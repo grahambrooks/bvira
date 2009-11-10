@@ -1,5 +1,7 @@
 package bvira.web;
 
+import bvira.model.RequestContext;
+import bvira.model.ResponseContext;
 import bvira.util.NotFoundException;
 
 import javax.servlet.ServletConfig;

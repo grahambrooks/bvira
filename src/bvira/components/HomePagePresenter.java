@@ -1,9 +1,9 @@
 package bvira.components;
 
-import bvira.web.Presenter;
+import bvira.model.ResponseContext;
+import bvira.model.Presenter;
 import bvira.web.TemplateFactory;
-import bvira.web.RequestContext;
-import bvira.web.ResponseContext;
+import bvira.model.RequestContext;
 import bvira.web.TemplateWriter;
 
 public class HomePagePresenter implements Presenter {

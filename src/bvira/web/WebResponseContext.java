@@ -1,5 +1,7 @@
 package bvira.web;
 
+import bvira.model.ResponseContext;
+
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;

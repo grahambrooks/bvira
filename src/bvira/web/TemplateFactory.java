@@ -1,5 +1,7 @@
 package bvira.web;
 
+import bvira.model.Presenter;
+
 import java.io.PrintWriter;
 
 public interface TemplateFactory {

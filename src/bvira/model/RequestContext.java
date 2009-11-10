@@ -1,6 +1,9 @@
-package bvira.web;
+package bvira.model;
 
-import bvira.model.Field;
+import bvira.web.ContextPath;
+import bvira.web.ContextRoot;
+import bvira.web.Parameters;
+import bvira.web.RequestUri;
 
 public interface RequestContext {
 

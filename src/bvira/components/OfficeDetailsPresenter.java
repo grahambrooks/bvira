@@ -1,10 +1,10 @@
 package bvira.components;
 
 import bvira.model.Office;
+import bvira.model.Presenter;
 import bvira.persistance.Finder;
-import bvira.web.Presenter;
-import bvira.web.RequestContext;
-import bvira.web.ResponseContext;
+import bvira.model.RequestContext;
+import bvira.model.ResponseContext;
 import bvira.web.TemplateFactory;
 import bvira.web.TemplateWriter;
 

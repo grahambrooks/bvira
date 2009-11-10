@@ -1,8 +1,8 @@
 package bvira.components;
 
-import bvira.web.Presenter;
-import bvira.web.RequestContext;
-import bvira.web.ResponseContext;
+import bvira.model.RequestContext;
+import bvira.model.ResponseContext;
+import bvira.model.Presenter;
 import bvira.web.TemplateFactory;
 import bvira.web.TemplateWriter;
 

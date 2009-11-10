@@ -35,8 +35,6 @@ public class WorkflowTestWebEnvironment extends WebEnvironment implements Closea
 
     public <T extends HtmlPage> T responsePage(Class<T> pageClass) {
         try {
-//            String source = driver.getPageSource();
-//            System.out.println(source);
             return pageClass.getConstructor(DriverAdaptor.class).newInstance(new WebDriverAdaptor(driver));
         } catch (Exception e) {
             throw new RuntimeException(e);
