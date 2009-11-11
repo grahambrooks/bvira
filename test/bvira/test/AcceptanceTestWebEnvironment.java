@@ -1,20 +1,10 @@
 package bvira.test;
 
 import bvira.model.Field;
-import bvira.model.ResponseContext;
-import bvira.test.abstraction.DriverAdaptor;
-import bvira.test.abstraction.For;
-import bvira.test.abstraction.HtmlPage;
-import bvira.test.abstraction.HTTPInteraction;
-import bvira.test.abstraction.StaticDriverAdaptor;
-import bvira.test.abstraction.To;
-import bvira.web.ContextPath;
-import bvira.web.ContextRoot;
-import bvira.web.Parameters;
 import bvira.model.RequestContext;
-import bvira.web.RequestUri;
-import bvira.web.TemplateWriter;
-import bvira.web.WebApplication;
+import bvira.model.ResponseContext;
+import bvira.test.abstraction.*;
+import bvira.web.*;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -29,7 +19,7 @@ public class AcceptanceTestWebEnvironment extends WebEnvironment {
 
     }
 
-    public WebEnvironment navigate(final To uri) {
+    public WebEnvironment navigate(final Navigator uri) {
         RequestContext requestContext = new RequestContext() {
             public ContextRoot getContextRoot() {
                 return null;
@@ -40,7 +30,9 @@ public class AcceptanceTestWebEnvironment extends WebEnvironment {
             }
 
             public RequestUri getRequestUri() {
-                return new RequestUri(uri.getPath(), "");
+                RequestUri requestUri = new RequestUri();
+                uri.navigate(requestUri);
+                return requestUri;
             }
 
             public Parameters getParameters() {
@@ -96,6 +88,6 @@ public class AcceptanceTestWebEnvironment extends WebEnvironment {
     }
 
     public void clearHttpInteractionLog() {
-        throw new UnsupportedOperationException("Clearing interactions is not suported");
+        throw new UnsupportedOperationException("Clearing interactions is not supported");
     }
 }

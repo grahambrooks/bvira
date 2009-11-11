@@ -1,6 +1,8 @@
 package bvira.test.abstraction;
 
-public class To {
+import bvira.model.Navigable;
+
+public class To implements Navigator {
 	private final String path;
 
 	public To(String path) {
@@ -11,15 +13,15 @@ public class To {
 		return new To(path);
 	}
 
-	public String getPath() {
-		return path;
-	}
-
-	public static To homePage() {
+    public static To homePage() {
 		return new To("/");
 	}
 	
 	public static To loginPage() {
 		return new To("/login");
 	}
+
+    public void navigate(Navigable navigable) {
+        navigable.setPath(path);
+    }
 }

@@ -1,9 +1,6 @@
 package bvira.test;
 
-import bvira.test.abstraction.For;
-import bvira.test.abstraction.HtmlPage;
-import bvira.test.abstraction.HTTPInteraction;
-import bvira.test.abstraction.To;
+import bvira.test.abstraction.*;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -25,7 +22,7 @@ public abstract class WebEnvironment implements Closeable {
     }
 
 
-    public abstract WebEnvironment navigate(To uri);
+    public abstract WebEnvironment navigate(Navigator navigator);
 
     public abstract <T extends HtmlPage> T responsePage(Class<T> pageClass);
 

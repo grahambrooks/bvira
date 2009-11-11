@@ -47,7 +47,7 @@ class JettyServer {
     private Context createContext() {
         WebAppContext wac = new WebAppContext();
         wac.setContextPath(contextPath);
-        // this is path to .war OR TO expanded existing webapp
+        // this is path to .war OR TO expanded existing web application
         // WILL FIND web.xml and parse it
         wac.setWar(contextDir);
         return wac;

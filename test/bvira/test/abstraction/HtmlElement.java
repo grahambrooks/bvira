@@ -181,7 +181,6 @@ public class HtmlElement implements WebElement, SearchContext, FindsById,
         return element.getValue();
     }
 
-    @SuppressWarnings("unchecked")
     public List<WebElement> getChildElements() {
         return toHtmlElements(element.getChildren());
     }

@@ -1,11 +1,7 @@
 package bvira.test;
 
-import bvira.test.abstraction.DriverAdaptor;
-import bvira.test.abstraction.For;
-import bvira.test.abstraction.HTTPInteraction;
-import bvira.test.abstraction.HtmlPage;
-import bvira.test.abstraction.To;
-import bvira.test.abstraction.WebDriverAdaptor;
+import bvira.model.Navigable;
+import bvira.test.abstraction.*;
 import bvira.webserver.WebServer;
 import intercept.configuration.ProxyConfig;
 import intercept.logging.ApplicationLog;
@@ -28,8 +24,24 @@ public class WorkflowTestWebEnvironment extends WebEnvironment implements Closea
     private ProxyServer proxyServer;
     private static final int PROXY_PORT = 2001;
 
-    public WebEnvironment navigate(To uri) {
-        driver.get("http://localhost:8080" + uri.getPath());
+    public WebEnvironment navigate(Navigator navigator) {
+        if (navigator == null) {
+            throw new RuntimeException("Navigator cannot be null");
+        }
+
+        if (driver == null) {
+            throw new RuntimeException("Test environment not started");
+        }
+        final String[] targetPath = new String[1];
+        Navigable navigable = new Navigable() {
+            public void setPath(String path) {
+                targetPath[0] = path;
+            }
+        };
+
+        navigator.navigate(navigable);
+        driver.get("http://localhost:8080" + targetPath[0]);
+
         return this;
     }
 
@@ -42,7 +54,6 @@ public class WorkflowTestWebEnvironment extends WebEnvironment implements Closea
     }
 
     public WebEnvironment start() {
-
         proxyServer = startProxy(PROXY_PORT);
 
         startBrowser(PROXY_PORT);
@@ -63,7 +74,7 @@ public class WorkflowTestWebEnvironment extends WebEnvironment implements Closea
     }
 
     private ProxyServer startProxy(int proxyPort) {
-        ApplicationLog log = new ApplicationLog(){
+        ApplicationLog log = new ApplicationLog() {
             public void log(String s) {
             }
 
@@ -97,7 +108,8 @@ public class WorkflowTestWebEnvironment extends WebEnvironment implements Closea
         for (LogEntry entry : entries) {
             if (entry.elements.size() > 3) {
                 if (entry.elements.get(3).getMessage().startsWith(clause.getDomain())) {
-                    interactions.add(new HTTPInteraction(){});
+                    interactions.add(new HTTPInteraction() {
+                    });
                 }
             }
         }
@@ -124,9 +136,7 @@ public class WorkflowTestWebEnvironment extends WebEnvironment implements Closea
     }
 
     private void stopProxyServer() {
-        if (proxyServer != null) {
-            proxyServer.stop();
-            proxyServer = null;
-        }
+        InterceptProxy.shutdown();
+        proxyServer = null;
     }
 }

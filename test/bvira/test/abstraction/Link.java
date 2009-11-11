@@ -29,9 +29,6 @@ public class Link {
         return htmlElement.getText();
     }
 
-    public boolean isPopup() {
-        return "_blank".equals(htmlElement.getAttribute("target"));
-    }
     public String getTitle(){
     	return htmlElement.getAttribute("title");
     }

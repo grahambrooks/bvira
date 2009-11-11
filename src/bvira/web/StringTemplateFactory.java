@@ -1,12 +1,11 @@
 package bvira.web;
 
 import bvira.model.Presenter;
-import org.antlr.stringtemplate.StringTemplateGroup;
 import org.antlr.stringtemplate.StringTemplate;
+import org.antlr.stringtemplate.StringTemplateGroup;
 
-import java.io.PrintWriter;
-import java.io.Writer;
 import java.io.IOException;
+import java.io.Writer;
 
 public class StringTemplateFactory implements TemplateFactory {
     StringTemplateGroup group;
@@ -34,9 +33,5 @@ public class StringTemplateFactory implements TemplateFactory {
     private String nameForClass(Class<? extends Presenter> aClass) {
         String className = aClass.getSimpleName();
         return className.replaceAll("Presenter", "");
-    }
-
-    public void write(Class<? extends Presenter> aClass, PrintWriter writer, Object... attributes) {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 }

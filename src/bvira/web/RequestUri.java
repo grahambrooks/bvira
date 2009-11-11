@@ -1,9 +1,16 @@
 package bvira.web;
 
-public class RequestUri {
+import bvira.model.Navigable;
 
-    private final String path;
+public class RequestUri implements Navigable {
+
+    private String path;
     private final String query;
+
+    public RequestUri() {
+        this.path = "";
+        this.query = "";
+    }
 
     public RequestUri(String path, String query) {
         this.path = path;
@@ -33,5 +40,9 @@ public class RequestUri {
             return path + "?" + query;
         }
         return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 }
