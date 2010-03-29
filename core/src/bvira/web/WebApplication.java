@@ -30,7 +30,7 @@ public class WebApplication {
     }
 
     public void executePresenter(RequestContext requestContext, ResponseContext responseContext) {
-        Container requestContainer = container.transiantContainer();
+        Container requestContainer = container.transientContainer();
 
         Class<? extends Presenter> presenterClass = routeMap.findPresenter(requestContext.getRequestUri());
         Presenter presenter = requestContainer.getInstance(presenterClass);
@@ -38,7 +38,7 @@ public class WebApplication {
     }
 
     public void executeCommand(RequestContext requestContext, ResponseContext responseContext) {
-        Container requestContainer = container.transiantContainer();
+        Container requestContainer = container.transientContainer();
 
         Class<? extends Command> commandClass = routeMap.findCommand(requestContext.getRequestUri());
         Command command = requestContainer.getInstance(commandClass);

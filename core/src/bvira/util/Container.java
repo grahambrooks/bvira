@@ -17,5 +17,5 @@ public interface Container {
 
     public <T> boolean containsInstance(Class<T> classInstance);
 
-    Container transiantContainer();
+    Container transientContainer();
 }

@@ -6,18 +6,18 @@ import org.picocontainer.containers.TransientPicoContainer;
 
 
 public class DefaultContainer implements Container {
-    final MutablePicoContainer pico;
+    final MutablePicoContainer picoContainer;
 
     public DefaultContainer() {
-        pico = new DefaultPicoContainer();
+        picoContainer = new DefaultPicoContainer();
     }
 
     public DefaultContainer(DefaultContainer parent) {
-        pico = new TransientPicoContainer(parent.pico);
+        picoContainer = new TransientPicoContainer(parent.picoContainer);
     }
 
     public <T> T getInstance(Class<T> aClass) {
-        T instance = pico.getComponent(aClass);
+        T instance = picoContainer.getComponent(aClass);
         if (instance == null) {
             throw new IllegalArgumentException("Cannot find instance of " + aClass);
         }
@@ -26,7 +26,7 @@ public class DefaultContainer implements Container {
 
     public Container register(Class<?>... classes) {
         for (Class<?> clazz : classes) {
-            pico.addComponent(clazz);
+            picoContainer.addComponent(clazz);
         }
         return this;
     }
@@ -34,29 +34,29 @@ public class DefaultContainer implements Container {
     public Container register(Object... objects) {
         for (Object o : objects) {
             unregister(o.getClass());
-            pico.addComponent(o);
+            picoContainer.addComponent(o);
         }
         return this;
     }
 
     private void unregister(Class<?> clazz) {
         for (Class type : clazz.getInterfaces()) {
-            pico.removeComponent(type);
+            picoContainer.removeComponent(type);
         }
-        pico.removeComponent(clazz);
+        picoContainer.removeComponent(clazz);
     }
 
     public void dispose() {
-        pico.dispose();
+        picoContainer.dispose();
     }
 
     public Container registerSpecificInstance(Class<?> interfaceClass, Object instance) {
-        pico.addComponent(interfaceClass, instance);
+        picoContainer.addComponent(interfaceClass, instance);
         return this;
     }
 
     public Container registerSpecificImplementation(Class<?> interfaceClass, Class<?> implementation) {
-        pico.addComponent(interfaceClass, implementation);
+        picoContainer.addComponent(interfaceClass, implementation);
         return this;
     }
 
@@ -69,7 +69,7 @@ public class DefaultContainer implements Container {
         }
     }
 
-    public Container transiantContainer() {
+    public Container transientContainer() {
         return new DefaultContainer(this);
     }
 }
