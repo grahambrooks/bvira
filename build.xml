@@ -94,8 +94,8 @@
     </macrodef>
 
     <macrodef name="unit.test">
-
         <attribute name="test.dir"/>
+        <attribute name="test.type" default="UnitTests"/>
 
         <sequential>
             <mkdir dir="${test.reports.dir}"/>
@@ -119,7 +119,7 @@
                 </batchtest>
                 <batchtest todir="${test.reports.dir}" unless="testcase">
                     <fileset dir="@{test.dir}">
-                        <include name="**/*Tests.java"/>
+                        <include name="**/*@{test.type}.java"/>
                     </fileset>
                 </batchtest>
             </junit>
