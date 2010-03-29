@@ -21,7 +21,6 @@ public class WebApplication {
         for (Class service : services) {
             this.container.register(service);
         }
-//        this.container.register(new StubOfficeFinder());
 
         for (Component component : components) {
             component.registerClasses(container);
