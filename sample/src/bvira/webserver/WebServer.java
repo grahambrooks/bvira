@@ -11,7 +11,7 @@ public class WebServer {
         String host = System.getProperty("jetty.host", "0.0.0.0");
         int port = Integer.parseInt(System.getProperty("jetty.port", "8080"));
 
-        this.jetty = new JettyServer(host, port, "/", "web");
+        this.jetty = new JettyServer(host, port, "/", "sample/web");
     }
 
     public void start() {

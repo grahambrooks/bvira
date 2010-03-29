@@ -7,7 +7,7 @@
 <h1>Please enter your username and password</h1>
 
 <form action="/login" method="POST">
-    <label for="name">Username</label>
+    <label for="username">Username</label>
     <input name="username" id="username" type="text"></input>
     <br/>
     <label for="password">Password</label>

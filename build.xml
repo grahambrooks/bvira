@@ -45,7 +45,7 @@
     <path id="test.classpath">
         <fileset dir="${jar.dir}" includes="*.jar"/>
         <path refid="classpath"/>
-        <path location="web/components"/>
+        <path location="sample/web/components"/>
     </path>
 
     <path id="cobertura.class.path">
@@ -188,13 +188,13 @@
 
     <target name="package">
         <mkdir dir="${dist.dir}"/>
-        <war destfile="${dist.dir}/bvira.war" webxml="web/WEB-INF/web.xml" manifest="${manifest.file}">
+        <war destfile="${dist.dir}/bvira.war" webxml="sample/web/WEB-INF/web.xml" manifest="${manifest.file}">
             <lib dir="lib/run"/>
             <lib dir="${jar.dir}">
                 <include name="*.jar"/>
                 <exclude name="*.test.jar"/>
             </lib>
-            <fileset dir="web" casesensitive="yes">
+            <fileset dir="sample/web" casesensitive="yes">
                 <exclude name="WEB-INF/web.xml"/>
             </fileset>
         </war>
@@ -209,7 +209,7 @@
             <classpath>
                 <fileset dir="${jar.dir}" includes="*.jar"/>
                 <fileset dir="lib" includes="**/*.jar"/>
-                <path location="web/components"/>
+                <path location="sample/web/components"/>
             </classpath>
         </java>
     </target>
