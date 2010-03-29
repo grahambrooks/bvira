@@ -33,13 +33,13 @@ public class DefaultContainer implements Container {
 
     public Container register(Object... objects) {
         for (Object o : objects) {
-            unregister(o.getClass());
+            remove(o.getClass());
             picoContainer.addComponent(o);
         }
         return this;
     }
 
-    private void unregister(Class<?> clazz) {
+    private void remove(Class<?> clazz) {
         for (Class type : clazz.getInterfaces()) {
             picoContainer.removeComponent(type);
         }
