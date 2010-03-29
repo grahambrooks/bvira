@@ -6,7 +6,7 @@ import bvira.model.ResponseContext;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class WebRouteMapTests {
+public class WebRouteMapUnitTests {
 
     @Test
     public void testCanCreateRouteMap() {
