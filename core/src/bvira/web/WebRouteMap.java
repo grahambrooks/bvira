@@ -3,7 +3,6 @@ package bvira.web;
 import bvira.framework.Command;
 import bvira.framework.Navigable;
 import bvira.framework.Presenter;
-import bvira.framework.RequestUri;
 import bvira.framework.Route;
 import bvira.framework.RouteMap;
 import bvira.util.Lists;
@@ -18,12 +17,6 @@ public class WebRouteMap implements RouteMap {
     private final Map<Route, Class<? extends Presenter>> presenterRoutes = Maps.create();
     private final Map<Route, Class<? extends Command>> commandRoutes = Maps.create();
 
-    public Class<? extends Presenter> findPresenter(Navigable requestUri) {
-        String path = requestUri.getPath();
-
-        return presenterRoutes.get(findRoute(path));
-    }
-
     public void registerPresenter(Route route, Class<? extends Presenter> presenterClass) {
         routes.add(route);
         presenterRoutes.put(route, presenterClass);
@@ -35,10 +28,14 @@ public class WebRouteMap implements RouteMap {
         commandRoutes.put(route, commandClass);
     }
 
-    public Class<? extends Command> findCommand(Navigable requestUri) {
-        String path = requestUri.getPath();
+    public Class<? extends Presenter> findPresenter(Navigable requestUri) {
 
-        return commandRoutes.get(findRoute(path));
+        return presenterRoutes.get(findRoute(requestUri.getPath()));
+    }
+
+    public Class<? extends Command> findCommand(Navigable requestUri) {
+
+        return commandRoutes.get(findRoute(requestUri.getPath()));
     }
 
     private Route findRoute(String path) {
