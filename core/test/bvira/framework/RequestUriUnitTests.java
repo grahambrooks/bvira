@@ -21,4 +21,11 @@ public class RequestUriUnitTests {
 
         assertThat(requestUri.getExtension(), is("ext"));
     }
+
+    @Test
+    public void requestUriRetainsPath() {
+        RequestUri requestUri = new RequestUri("some-resource.ext", "");
+
+        assertThat(requestUri.getPath(), is("some-resource.ext"));
+    }
 }
