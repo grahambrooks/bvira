@@ -48,7 +48,7 @@ public class WebRouteMapUnitTests {
             }
         }
 
-        map.registerRoute(new WebRoute("route"), null, ACommand.class);
+        map.registerRoute(new WebRoute("route"), ACommand.class);
 
         assertSame(ACommand.class, map.findCommand(new RequestUri("route", "")));
     }
