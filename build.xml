@@ -139,7 +139,7 @@
 
     </macrodef>
 
-    <target  name="compile.core" description="compile the core sources">
+    <target name="compile.core" description="compile the core sources">
         <mkdir dir="${jar.dir}"/>
         <manifest file="${manifest.file}">
             <attribute name="Built-By" value="${user.name}"/>
@@ -179,9 +179,13 @@
                         classpathref="test.classpath"/>
     </target>
 
-    <target name="test" description="Runs JUnit tests" unless="notests">
+    <target name="test" description="Runs JUnit tests" depends="test.core, test.sample">
+    </target>
+
+    <target name="test.sample" description="Runs JUnit tests" unless="notests">
         <unit.test test.dir="${sample.test.dir}"/>
     </target>
+
     <target name="test.core" description="Runs JUnit tests" unless="notests" depends="compile.core">
         <unit.test test.dir="${core.test.dir}"/>
     </target>
