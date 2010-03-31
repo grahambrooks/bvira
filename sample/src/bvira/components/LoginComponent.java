@@ -2,8 +2,8 @@ package bvira.components;
 
 import bvira.framework.Component;
 import bvira.framework.RouteMap;
-import bvira.web.WebRoute;
 import bvira.util.Container;
+import bvira.web.WebRoute;
 
 public class LoginComponent implements Component {
     public void registerClasses(Container container) {
@@ -12,6 +12,6 @@ public class LoginComponent implements Component {
     }
 
     public void registerRoutes(RouteMap routeMap) {
-        routeMap.registerPresenter(new WebRoute("/login"), LoginPresenter.class, LoginCommand.class);
+        routeMap.registerRoute(new WebRoute("/login"), LoginPresenter.class, LoginCommand.class);
     }
 }

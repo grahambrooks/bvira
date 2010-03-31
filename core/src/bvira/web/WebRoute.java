@@ -13,4 +13,8 @@ public class WebRoute implements Route {
     public boolean match(String path) {
         return route.equals(path);
     }
+
+    public boolean match(Route route) {
+        return route.match(this.route);
+    }
 }

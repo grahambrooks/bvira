@@ -6,7 +6,7 @@ public interface RouteMap {
 
     void registerPresenter(Route route, Class<? extends Presenter> presenterClass);
 
-    void registerPresenter(Route route, Class<? extends Presenter> presenterClass, Class<? extends Command> commandClass);
+    void registerRoute(Route route, Class<? extends Presenter> presenterClass, Class<? extends Command> commandClass);
 
     Class<? extends Command> findCommand(Navigable navigable);
 }
