@@ -11,6 +11,18 @@ import static org.junit.Assert.assertSame;
 
 public class WebRouteMapUnitTests {
 
+    class APresenter implements Presenter {
+
+        public void present(RequestContext requestContext, ResponseContext responseContext) {
+        }
+    }
+
+    class ACommand implements Command {
+
+        public void execute(RequestContext requestContext, ResponseContext responseContext) {
+        }
+    }
+
     @Test
     public void testCanCreateRouteMap() {
         new WebRouteMap();
@@ -23,20 +35,26 @@ public class WebRouteMapUnitTests {
         map.registerPresenter(new WebRoute("/"), null);
     }
 
+
     @Test
     public void testRouteMapMatchesSuppliedRoute() {
         WebRouteMap map = new WebRouteMap();
 
-        class APresenter implements Presenter {
-
-            public void present(RequestContext requestContext, ResponseContext responseContext) {
-            }
-        }
 
         map.registerPresenter(new WebRoute("/"), APresenter.class);
 
         RequestUri requestUri = new RequestUri("/", "");
         assertSame(APresenter.class, map.findPresenter(requestUri));
+    }
+
+    @Test
+    public void routeMapHandlesCommandAndPresenterMatchingSameRoute() {
+        WebRouteMap map = new WebRouteMap();
+
+        map.registerRoute(new WebRoute("route"), APresenter.class, ACommand.class);
+
+        assertSame(ACommand.class, map.findCommand(new RequestUri("route", "")));
+        assertSame(APresenter.class, map.findPresenter(new RequestUri("route", "")));
     }
 
     @Test
