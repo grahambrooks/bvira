@@ -40,7 +40,6 @@ public class WebRouteMapUnitTests {
     public void testRouteMapMatchesSuppliedRoute() {
         WebRouteMap map = new WebRouteMap();
 
-
         map.registerPresenter(new WebRoute("/"), APresenter.class);
 
         RequestUri requestUri = new RequestUri("/", "");
