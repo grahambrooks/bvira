@@ -21,7 +21,7 @@ public class WebResponseContext implements ResponseContext {
         return new WebResponseContext(response, ResourceContentType.fromRequest(requestUri));
     }
 
-    public PrintWriter getWriter() {
+    private PrintWriter getWriter() {
         try {
             response.setContentType(contentType.toString());
             return response.getWriter();
