@@ -7,7 +7,9 @@ import java.util.Map;
 
 public class ResourceContentType {
 
-    private final static Map<String, String> ContentTypes = new HashMap<String, String>();
+    private final static Map<String, String> ContentTypes = new HashMap<String, String>() {{
+        put("txt", "text/text");
+    }};
 
     private final static String DefaultContentType = "text/html";
     private final static String DefaultEncoding = "UTF-8";
