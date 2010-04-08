@@ -5,4 +5,6 @@ public interface ResponseContext {
     void writeTemplate(TemplateWriter template);
 
     void redirectTo(String path);
+
+    void validateResponse();
 }

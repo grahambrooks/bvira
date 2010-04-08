@@ -12,6 +12,9 @@
     <property name="core.src.dir" location="core/src"/>
     <property name="core.test.dir" location="core/test"/>
 
+    <property name="tool.src.dir" location="tool/src"/>
+    <property name="tool.test.dir" location="tool/test"/>
+
     <property name="build.dir" location="build"/>
     <property name="dist.dir" value="${build.dir}/dist"/>
 
@@ -139,6 +142,27 @@
 
     </macrodef>
 
+    <target name="compile.tool" description="compile the tool sources">
+        <mkdir dir="${jar.dir}"/>
+        <manifest file="${manifest.file}">
+            <attribute name="Built-By" value="${user.name}"/>
+            <section name="bvira">
+                <attribute name="Specification-Title" value="${ant.project.name} core"/>
+                <attribute name="Specification-Version" value="${release.label}"/>
+                <attribute name="Specification-Vendor" value="ThoughtWorks Inc."/>
+                <attribute name="Implementation-Title" value="common"/>
+                <attribute name="Implementation-Version" value="${release.label}"/>
+                <attribute name="Implementation-Vendor" value="ThoughtWorks Inc."/>
+            </section>
+        </manifest>
+        <compile.source src.dir="${tool.src.dir}" dest.dir="${jar.dir}"
+                        jar.name="${ant.project.name}.tool.jar" manifest="${manifest.file}"/>
+        <compile.source src.dir="${tool.test.dir}" dest.dir="${jar.dir}"
+                        jar.name="${ant.project.name}.tool.test.jar" manifest="${manifest.file}"
+                        classpathref="test.classpath"/>
+    </target>
+
+
     <target name="compile.core" description="compile the core sources">
         <mkdir dir="${jar.dir}"/>
         <manifest file="${manifest.file}">
@@ -179,7 +203,7 @@
                         classpathref="test.classpath"/>
     </target>
 
-    <target name="test" description="Runs JUnit tests" depends="test.core, test.sample">
+    <target name="test" description="Runs JUnit tests" depends="test.core, test.sample, test.tool">
     </target>
 
     <target name="test.sample" description="Runs JUnit tests" unless="notests">
@@ -188,6 +212,10 @@
 
     <target name="test.core" description="Runs JUnit tests" unless="notests" depends="compile.core">
         <unit.test test.dir="${core.test.dir}"/>
+    </target>
+
+    <target name="test.tool" description="Runs JUnit tests" unless="notests" depends="compile.tool">
+        <unit.test test.dir="${tool.test.dir}"/>
     </target>
 
     <target name="package">

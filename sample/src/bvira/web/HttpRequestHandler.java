@@ -41,9 +41,9 @@ public class HttpRequestHandler extends HttpServlet {
         RequestUri requestUri = getRequestUri(request).without(request.getContextPath());
         try {
             RequestContext webRequest = WebRequestContext.create(request, requestUri);
-            ResponseContext webResponse = WebResponseContext.create(response, requestUri);
+            ResponseContext webResponse = PresenterResponse.create(response, requestUri);
             application.executePresenter(webRequest, webResponse);
-
+            webResponse.validateResponse();
         } catch (RuntimeException e) {
             error(requestUri, response, e);
         }
@@ -54,7 +54,7 @@ public class HttpRequestHandler extends HttpServlet {
         RequestUri requestUri = getRequestUri(request).without(request.getContextPath());
         try {
             RequestContext webRequest = WebRequestContext.create(request, requestUri);
-            ResponseContext webResponse = WebResponseContext.create(response, requestUri);
+            ResponseContext webResponse = CommandResponse.create(response, requestUri);
             application.executeCommand(webRequest, webResponse);
 
         } catch (RuntimeException e) {

@@ -63,6 +63,9 @@ public class SimpleHomePageAcceptanceTests {
 
             public void redirectTo(String path) {
             }
+
+            public void validateResponse() {
+            }
         };
 
         WebApplication webApplication = new WebApplication(HttpRequestHandler.components, new DefaultContainer(), new StringTemplateFactory(), HttpRequestHandler.services);

@@ -69,6 +69,9 @@ public class AcceptanceTestWebEnvironment extends WebEnvironment {
 
             public void redirectTo(String path) {
             }
+
+            public void validateResponse() {
+            }
         };
         application.executePresenter(requestContext, responseContext);
 

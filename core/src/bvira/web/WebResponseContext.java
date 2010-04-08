@@ -1,6 +1,5 @@
 package bvira.web;
 
-import bvira.framework.RequestUri;
 import bvira.framework.ResponseContext;
 import bvira.framework.TemplateWriter;
 
@@ -11,14 +10,12 @@ import java.io.PrintWriter;
 public class WebResponseContext implements ResponseContext {
     private final HttpServletResponse response;
     private final ResourceContentType contentType;
+    private boolean validResponse;
 
-    public WebResponseContext(HttpServletResponse response, ResourceContentType contentType) {
+    protected WebResponseContext(HttpServletResponse response, ResourceContentType contentType) {
         this.response = response;
         this.contentType = contentType;
-    }
-
-    public static ResponseContext create(HttpServletResponse response, RequestUri requestUri) {
-        return new WebResponseContext(response, ResourceContentType.fromRequest(requestUri));
+        this.validResponse = false;
     }
 
     private PrintWriter getWriter() {
@@ -33,13 +30,21 @@ public class WebResponseContext implements ResponseContext {
 
     public void writeTemplate(TemplateWriter template) {
         template.write(getWriter());
+        validResponse = true;
     }
 
     public void redirectTo(String path) {
         try {
             response.sendRedirect(path);
+            validResponse = true;
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public void validateResponse() {
+        if (!validResponse) {
+            throw new RuntimeException("Invalid response to request. Presenters should redirect or generate content. Commands must redirect to a presenter for their outcome");
         }
     }
 }

@@ -8,22 +8,21 @@ import bvira.framework.RequestContext;
 import bvira.framework.RequestUri;
 import bvira.framework.ResponseContext;
 import bvira.framework.TemplateWriter;
-
-import static org.hamcrest.CoreMatchers.is;
-
 import bvira.util.DefaultContainer;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.jdom.xpath.XPath;
-import static org.junit.Assert.assertThat;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 public class SimpleLoginAcceptanceTests {
     @Test
@@ -61,6 +60,9 @@ public class SimpleLoginAcceptanceTests {
             }
 
             public void redirectTo(String path) {
+            }
+
+            public void validateResponse() {
             }
         };
 
