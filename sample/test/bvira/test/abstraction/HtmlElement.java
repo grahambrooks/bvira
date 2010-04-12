@@ -1,27 +1,29 @@
 package bvira.test.abstraction;
 
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.By;
-import org.openqa.selenium.internal.FindsById;
-import org.openqa.selenium.internal.FindsByXPath;
-import org.openqa.selenium.internal.FindsByTagName;
-import org.openqa.selenium.internal.FindsByLinkText;
-import org.openqa.selenium.internal.FindsByName;
+import org.antlr.stringtemplate.StringTemplate;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.Text;
 import org.jdom.xpath.XPath;
-import org.antlr.stringtemplate.StringTemplate;
+import org.openqa.selenium.By;
+import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.internal.FindsById;
+import org.openqa.selenium.internal.FindsByLinkText;
+import org.openqa.selenium.internal.FindsByName;
+import org.openqa.selenium.internal.FindsByTagName;
+import org.openqa.selenium.internal.FindsByXPath;
 
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class HtmlElement implements WebElement, SearchContext, FindsById,
-    FindsByXPath, FindsByTagName, FindsByLinkText, FindsByName {
+        FindsByXPath, FindsByTagName, FindsByLinkText, FindsByName {
 
     private final Element element;
+    private static final String NOT_SUPPORTED = "Not supported";
+    private static final String NOT_YET_IMPLEMENTED = "Not yet implemented.";
 
     public HtmlElement(Element element) {
         this.element = element;
@@ -36,11 +38,11 @@ public class HtmlElement implements WebElement, SearchContext, FindsById,
     }
 
     public void click() {
-        throw new UnsupportedOperationException("Not supported");
+        throw new UnsupportedOperationException(NOT_SUPPORTED);
     }
 
     public void submit() {
-        throw new UnsupportedOperationException("Not supported");
+        throw new UnsupportedOperationException(NOT_SUPPORTED);
     }
 
     public void sendKeys(CharSequence... charSequences) {
@@ -54,11 +56,11 @@ public class HtmlElement implements WebElement, SearchContext, FindsById,
     }
 
     public void clear() {
-        throw new UnsupportedOperationException("Not supported");
+        throw new UnsupportedOperationException(NOT_SUPPORTED);
     }
 
     public String getTagName() {
-        throw new UnsupportedOperationException("Not supported");
+        throw new UnsupportedOperationException(NOT_SUPPORTED);
     }
 
     public String getElementName() {
@@ -76,15 +78,15 @@ public class HtmlElement implements WebElement, SearchContext, FindsById,
     }
 
     public List<WebElement> findElementsByLinkText(String s) {
-        throw new UnsupportedOperationException("Not yet implemented.");
+        throw new UnsupportedOperationException(NOT_YET_IMPLEMENTED);
     }
 
     public WebElement findElementByPartialLinkText(String s) {
-        throw new UnsupportedOperationException("Not yet implemented.");
+        throw new UnsupportedOperationException(NOT_YET_IMPLEMENTED);
     }
 
     public List<WebElement> findElementsByPartialLinkText(String s) {
-        throw new UnsupportedOperationException("Not yet implemented.");
+        throw new UnsupportedOperationException(NOT_YET_IMPLEMENTED);
     }
 
     public WebElement findElementByName(String s) {
@@ -92,7 +94,7 @@ public class HtmlElement implements WebElement, SearchContext, FindsById,
     }
 
     public List<WebElement> findElementsByName(String s) {
-        throw new UnsupportedOperationException("Not yet implemented.");
+        throw new UnsupportedOperationException(NOT_YET_IMPLEMENTED);
     }
 
     public String getAttribute(String attributeName) {
@@ -121,7 +123,7 @@ public class HtmlElement implements WebElement, SearchContext, FindsById,
         if ("option".equals(name)) {
             selector = name;
             attributeName = "selected";
-        } else if ("input".equals(name) && "radio".equals(element.getAttribute("type").getValue())){
+        } else if ("input".equals(name) && "radio".equals(element.getAttribute("type").getValue())) {
             selector = "input[@type='radio']";
             attributeName = "checked";
         } else {
@@ -190,11 +192,11 @@ public class HtmlElement implements WebElement, SearchContext, FindsById,
             Object node = XPath.selectSingleNode(this.element, xpath);
 
             if (node == null) {
-            	throw new ElementNotFoundException("Unable to find element matching xpath: " + xpath);
+                throw new ElementNotFoundException("Unable to find element matching xpath: " + xpath);
             } else if (node instanceof Element) {
-            	return new HtmlElement((Element)node);
+                return new HtmlElement((Element) node);
             } else if (node instanceof Text) {
-            	return new TextNode((Text)node);
+                return new TextNode((Text) node);
             }
             throw new ElementNotFoundException("Unable to find element matching xpath: " + xpath);
         } catch (JDOMException e) {
@@ -245,8 +247,8 @@ public class HtmlElement implements WebElement, SearchContext, FindsById,
 
     @Override
     public String toString() {
-    	StringTemplate st = new StringTemplate("<$element.name$ $element.attributes:{attr|$attr.name$=\"$attr.value$\" }$/>");
-    	st.setAttribute("element", element);
-    	return st.toString();
+        StringTemplate st = new StringTemplate("<$element.name$ $element.attributes:{attr|$attr.name$=\"$attr.value$\" }$/>");
+        st.setAttribute("element", element);
+        return st.toString();
     }
 }
