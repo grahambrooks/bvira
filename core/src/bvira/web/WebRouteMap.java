@@ -18,19 +18,17 @@ public class WebRouteMap implements RouteMap {
     private final Map<Route, Class<? extends Command>> commandRoutes = Maps.create();
 
     public void registerPresenter(Route route, Class<? extends Presenter> presenterClass) {
-        route = findOrCreate(route);
-        presenterRoutes.put(route, presenterClass);
+        presenterRoutes.put(findOrCreate(route), presenterClass);
     }
 
     public void registerRoute(Route route, Class<? extends Presenter> presenterClass, Class<? extends Command> commandClass) {
-        route = findOrCreate(route);
-        presenterRoutes.put(route, presenterClass);
-        commandRoutes.put(route, commandClass);
+        Route localRoute = findOrCreate(route);
+        presenterRoutes.put(localRoute, presenterClass);
+        commandRoutes.put(localRoute, commandClass);
     }
 
     public void registerRoute(Route route, Class<? extends Command> commandClass) {
-        route = findOrCreate(route);
-        commandRoutes.put(route, commandClass);
+        commandRoutes.put(findOrCreate(route), commandClass);
     }
 
     public Class<? extends Presenter> findPresenter(Navigable requestUri) {
