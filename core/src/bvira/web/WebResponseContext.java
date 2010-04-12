@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class WebResponseContext implements ResponseContext {
+class WebResponseContext implements ResponseContext {
     private final HttpServletResponse response;
     private final ResourceContentType contentType;
     private boolean validResponse;
@@ -44,7 +44,7 @@ public class WebResponseContext implements ResponseContext {
 
     public void validateResponse() {
         if (!validResponse) {
-            throw new RuntimeException("Invalid response to request. Presenters should redirect or generate content. Commands must redirect to a presenter for their outcome");
+            throw new RuntimeException("Invalid response to request. Presenters must return a redirect or generate content. Commands must return a redirect URL");
         }
     }
 }
