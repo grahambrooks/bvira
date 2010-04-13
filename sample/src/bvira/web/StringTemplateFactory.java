@@ -3,6 +3,7 @@ package bvira.web;
 import bvira.framework.Presenter;
 import bvira.framework.TemplateFactory;
 import bvira.framework.TemplateWriter;
+import bvira.framework.UnrecoverableErrorException;
 import org.antlr.stringtemplate.StringTemplate;
 import org.antlr.stringtemplate.StringTemplateGroup;
 
@@ -11,9 +12,11 @@ import java.io.Writer;
 
 public class StringTemplateFactory implements TemplateFactory {
     StringTemplateGroup group;
+
     public StringTemplateFactory() {
         group = new StringTemplateGroup("components");
     }
+
     public TemplateWriter templateFor(Class<? extends Presenter> aClass) {
         String templateName = nameForClass(aClass);
         final StringTemplate stringTemplate = group.getInstanceOf(templateName);
@@ -26,7 +29,7 @@ public class StringTemplateFactory implements TemplateFactory {
                 try {
                     writer.write(stringTemplate.toString());
                 } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    throw new UnrecoverableErrorException(e);
                 }
             }
         };

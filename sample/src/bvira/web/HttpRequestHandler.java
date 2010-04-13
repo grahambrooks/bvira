@@ -56,7 +56,7 @@ public class HttpRequestHandler extends HttpServlet {
             RequestContext webRequest = WebRequestContext.create(request, requestUri);
             ResponseContext webResponse = CommandResponse.create(response, requestUri);
             application.executeCommand(webRequest, webResponse);
-
+            webResponse.validateResponse();
         } catch (RuntimeException e) {
             error(requestUri, response, e);
         }
