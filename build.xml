@@ -4,8 +4,6 @@
     <!-- properties overridden by cruisecontrol -->
     <property name="release.label" value="Dev"/>
 
-    <property name="jar.name" value="bvira.jar"/>
-
     <property name="sample.src.dir" location="sample/src"/>
     <property name="sample.test.dir" location="sample/test"/>
 
@@ -105,7 +103,7 @@
     <macrodef name="unit.test">
         <attribute name="test.dir"/>
         <attribute name="test.type" default="UnitTests"/>
-        <attribute name="fork" default="no"/>
+        <attribute name="fork" default="yes"/>
 
         <sequential>
             <mkdir dir="${test.reports.dir}"/>
@@ -177,13 +175,13 @@
             </section>
         </manifest>
         <compile.source src.dir="${core.src.dir}" dest.dir="${jar.dir}"
-                        jar.name="${ant.project.name}.core.jar" manifest="${manifest.file}"/>
+                        jar.name="${ant.project.name}-core.jar" manifest="${manifest.file}"/>
         <compile.source src.dir="${core.test.dir}" dest.dir="${jar.dir}"
-                        jar.name="${ant.project.name}.core.test.jar" manifest="${manifest.file}"
+                        jar.name="${ant.project.name}-core-test.jar" manifest="${manifest.file}"
                         classpathref="test.classpath"/>
     </target>
 
-    <target name="compile" description="Compiles the source" depends="compile.core">
+    <target name="compile.sample" description="Compile the sample module sources">
         <mkdir dir="${jar.dir}"/>
         <manifest file="${manifest.file}">
             <attribute name="Built-By" value="${user.name}"/>
@@ -197,11 +195,13 @@
             </section>
         </manifest>
         <compile.source src.dir="${sample.src.dir}" dest.dir="${jar.dir}"
-                        jar.name="${ant.project.name}.jar" manifest="${manifest.file}"/>
+                        jar.name="${ant.project.name}-sample.jar" manifest="${manifest.file}"/>
         <compile.source src.dir="${sample.test.dir}" dest.dir="${jar.dir}"
-                        jar.name="${ant.project.name}.test.jar" manifest="${manifest.file}"
+                        jar.name="${ant.project.name}-sample-test.jar" manifest="${manifest.file}"
                         classpathref="test.classpath"/>
     </target>
+
+    <target name="compile" description="Compiles the source" depends="compile.core, compile.sample"/>
 
     <target name="test" description="Runs JUnit tests" depends="test.core, test.sample, test.tool">
     </target>
@@ -250,40 +250,46 @@
     <target name="instrument" depends="compile">
         <mkdir dir="${instrumented.dir}"/>
         <cobertura-instrument todir="${instrumented.dir}" datafile="${build.dir}/cobertura.ser">
-            <fileset dir="${jar.dir}">
-                <include name="${jar.name}"/>
-            </fileset>
+            <fileset dir="${jar.dir}" includes="*.jar"/>
         </cobertura-instrument>
     </target>
 
     <target name="coverage" depends="instrument, test">
         <cobertura-report format="html" destdir="${reports.dir}/html/cobertura"
                           datafile="${build.dir}/cobertura.ser">
-            <fileset dir="${sample.src.dir}">
+            <fileset dir="${core.src.dir}">
                 <include name="**/*.java"/>
             </fileset>
         </cobertura-report>
-        <cobertura-report format="xml" destdir="${reports.dir}/xml/cobertura"
+        <cobertura-report format="xml" destdir="${reports.dir}/xml"
                           datafile="${build.dir}/cobertura.ser">
-            <fileset dir="${sample.src.dir}">
+            <fileset dir="${core.src.dir}">
                 <include name="**/*.java"/>
             </fileset>
         </cobertura-report>
     </target>
 
 
+    <macrodef name="find.bugs">
+        <attribute name="module"/>
+        <sequential>
+            <mkdir dir="${reports.dir}/xml"/>
+            <findbugs home="${findbugs.home}"
+                      failOnError="true"
+                      output="xml"
+                      outputFile="${reports.dir}/xml/@{module}-findbugs.xml">
+                <auxClasspath>
+                    <path refid="test.classpath"/>
+                </auxClasspath>
+                <sourcePath path="@{module}/src/"/>
+                <class location="${jar.dir}/${ant.project.name}-@{module}.jar"/>
+            </findbugs>
+        </sequential>
+    </macrodef>
+
     <target name="findbugs" depends="compile">
-        <mkdir dir="${reports.dir}/xml"/>
-        <findbugs home="${findbugs.home}"
-                  failOnError="true"
-                  output="xml"
-                  outputFile="${reports.dir}/xml/findbugs.xml">
-            <auxClasspath>
-                <path refid="test.classpath"/>
-            </auxClasspath>
-            <sourcePath path="${basedir}/src/"/>
-            <class location="${jar.dir}/${jar.name}"/>
-        </findbugs>
+        <find.bugs module="core"/>
+        <find.bugs module="sample"/>
     </target>
 
     <target name="cucumber" depends="compile" description="Run Cucumber">
@@ -306,6 +312,6 @@
         </java>
     </target>
 
-    <target name="ci" depends="coverage, findbugs">
+    <target name="ci" depends="clean, coverage, findbugs">
     </target>
 </project>
