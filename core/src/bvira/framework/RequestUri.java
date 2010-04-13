@@ -1,7 +1,5 @@
 package bvira.framework;
 
-import bvira.framework.Navigable;
-
 public class RequestUri implements Navigable {
 
     private String path;
@@ -17,7 +15,7 @@ public class RequestUri implements Navigable {
         this.query = query;
     }
 
-    public RequestUri without(String context) {
+    public final RequestUri without(String context) {
         int beginIndex = context.length();
         return new RequestUri(path.substring(beginIndex), query);
     }
@@ -27,22 +25,22 @@ public class RequestUri implements Navigable {
         return (extensionPos < 0) ? "" : path.substring(extensionPos + 1);
     }
 
-    public String getPath() {
+    public final String getPath() {
         return path;
     }
 
-    public String getQuery() {
+    public final String getQuery() {
         return query;
     }
 
-    public String toString() {
+    public final String toString() {
         if (query != null) {
             return path + "?" + query;
         }
         return path;
     }
 
-    public void setPath(String path) {
+    public final void setPath(String path) {
         this.path = path;
     }
 }
