@@ -3,7 +3,7 @@ package bvira.webserver;
 public class WebServer {
     private final JettyServer jetty;
 
-    public static void main(String... args) throws Exception {
+    public static void main(String... args) {
         new WebServer().start();
     }
 

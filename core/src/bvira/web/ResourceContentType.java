@@ -7,18 +7,18 @@ import java.util.Map;
 
 public class ResourceContentType {
 
-    private final static Map<String, String> ContentTypes = new HashMap<String, String>() {{
+    private static final Map<String, String> ContentTypes = new HashMap<String, String>() {{
         put("txt", "text/text");
     }};
 
-    private final static String DefaultContentType = "text/html";
-    private final static String DefaultEncoding = "UTF-8";
+    private static final String DEFAULT_CONTENT_TYPE = "text/html";
+    private static final String DEFAULT_ENCODING = "UTF-8";
 
     private final String contentType;
     private final String encoding;
 
     public ResourceContentType() {
-        this(DefaultContentType, DefaultEncoding);
+        this(DEFAULT_CONTENT_TYPE, DEFAULT_ENCODING);
     }
 
     private ResourceContentType(String contentType, String encoding) {
@@ -29,9 +29,9 @@ public class ResourceContentType {
     public static ResourceContentType fromRequest(RequestUri requestUri) {
         String contentType = ContentTypes.get(requestUri.getExtension());
         if (contentType == null) {
-            contentType = DefaultContentType;
+            contentType = DEFAULT_CONTENT_TYPE;
         }
-        return new ResourceContentType(contentType, DefaultEncoding);
+        return new ResourceContentType(contentType, DEFAULT_ENCODING);
     }
 
     public String toString() {
