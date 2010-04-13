@@ -20,14 +20,13 @@ public class StaticDriverAdaptor implements DriverAdaptor, SearchContext {
     private final String source;
 
 
-
     public StaticDriverAdaptor(String htmlText) {
         source = htmlText;
         SAXBuilder builder = new SAXBuilder();
         try {
             document = builder.build(new StringReader(source));
         } catch (Exception e) {
-            throw new RuntimeException(("failure when trying to parse page in " + this.getClass().getName()), e);
+            throw new TestFrameworkException(("failure when trying to parse page in " + this.getClass().getName()), e);
         }
     }
 
@@ -125,7 +124,7 @@ public class StaticDriverAdaptor implements DriverAdaptor, SearchContext {
 
             return new HtmlElement(node);
         } catch (JDOMException e) {
-            throw new RuntimeException(e);
+            throw new TestFrameworkException(e);
         }
     }
 
@@ -197,7 +196,7 @@ public class StaticDriverAdaptor implements DriverAdaptor, SearchContext {
         try {
             return XPath.selectNodes(getRoot(), xpath);
         } catch (JDOMException e) {
-            throw new RuntimeException(e);
+            throw new TestFrameworkException(e);
         }
     }
 
@@ -211,7 +210,7 @@ public class StaticDriverAdaptor implements DriverAdaptor, SearchContext {
             }
             return htmlElements;
         } catch (JDOMException e) {
-            throw new RuntimeException(e);
+            throw new TestFrameworkException(e);
         }
     }
 

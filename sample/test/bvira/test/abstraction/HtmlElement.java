@@ -24,6 +24,7 @@ public class HtmlElement implements WebElement, SearchContext, FindsById,
     private final Element element;
     private static final String NOT_SUPPORTED = "Not supported";
     private static final String NOT_YET_IMPLEMENTED = "Not yet implemented.";
+    private static final String CHECKED = "checked";
 
     public HtmlElement(Element element) {
         this.element = element;
@@ -103,16 +104,16 @@ public class HtmlElement implements WebElement, SearchContext, FindsById,
 
     public boolean toggle() {
         if (isSelected()) {
-            element.removeAttribute("checked");
+            element.removeAttribute(CHECKED);
             return false;
         } else {
-            element.setAttribute("checked", "checked");
+            element.setAttribute(CHECKED, CHECKED);
             return true;
         }
     }
 
     public boolean isSelected() {
-        return element.getAttributeValue("checked") != null;
+        return element.getAttributeValue(CHECKED) != null;
     }
 
     public void setSelected() {
@@ -125,7 +126,7 @@ public class HtmlElement implements WebElement, SearchContext, FindsById,
             attributeName = "selected";
         } else if ("input".equals(name) && "radio".equals(element.getAttribute("type").getValue())) {
             selector = "input[@type='radio']";
-            attributeName = "checked";
+            attributeName = CHECKED;
         } else {
             throw new UnsupportedOperationException("Unsupported for " + name);
         }
@@ -136,7 +137,7 @@ public class HtmlElement implements WebElement, SearchContext, FindsById,
                 oldSelectedElement.removeAttribute(attributeName);
             }
         } catch (JDOMException e) {
-            throw new RuntimeException(e);
+            throw new TestFrameworkException(e);
         }
 
         element.setAttribute(attributeName, attributeName);
@@ -200,7 +201,7 @@ public class HtmlElement implements WebElement, SearchContext, FindsById,
             }
             throw new ElementNotFoundException("Unable to find element matching xpath: " + xpath);
         } catch (JDOMException e) {
-            throw new RuntimeException(e);
+            throw new TestFrameworkException(e);
         }
     }
 
@@ -209,7 +210,7 @@ public class HtmlElement implements WebElement, SearchContext, FindsById,
         try {
             return toHtmlElements(XPath.selectNodes(element, xpath));
         } catch (JDOMException e) {
-            throw new RuntimeException(e);
+            throw new TestFrameworkException(e);
         }
     }
 
