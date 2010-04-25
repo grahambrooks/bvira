@@ -270,7 +270,7 @@
     </target>
 
 
-    <macrodef name="find.bugs">
+    <macrodef name="find-bugs">
         <attribute name="module"/>
         <sequential>
             <mkdir dir="${reports.dir}/xml"/>
@@ -288,8 +288,8 @@
     </macrodef>
 
     <target name="findbugs" depends="compile">
-        <find.bugs module="core"/>
-        <find.bugs module="sample"/>
+        <find-bugs module="core"/>
+        <find-bugs module="sample"/>
     </target>
 
     <target name="cucumber" depends="compile" description="Run Cucumber">
