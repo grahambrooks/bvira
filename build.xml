@@ -117,7 +117,10 @@
                     <path refid="cobertura.class.path"/>
                 </classpath>
 
-                <formatter type="xml"/>
+
+                <formatter type="brief" usefile="false" unless="ci-build"/>
+                <formatter type="xml" if="ci-build"/>
+
                 <sysproperty key="net.sourceforge.cobertura.datafile" file="${build.dir}/cobertura.ser"/>
 
                 <batchtest todir="${test.reports.dir}" if="testcase">
@@ -125,6 +128,7 @@
                         <include name="**/${testcase}.java"/>
                     </fileset>
                 </batchtest>
+
                 <batchtest todir="${test.reports.dir}" unless="testcase">
                     <fileset dir="@{test.dir}">
                         <include name="**/*@{test.type}.java"/>
@@ -312,6 +316,11 @@
         </java>
     </target>
 
-    <target name="ci" depends="clean, coverage, findbugs">
+    <target name="ci">
+        <property name="ci-build" value="true"/>
+        <echo message="ci-build property is ${ci-build}"/>
+        <antcall target="ci-internal"/>
+    </target>
+    <target name="ci-internal" depends="clean, coverage, findbugs">
     </target>
 </project>
