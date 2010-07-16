@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+basedir=`dirname $0`
+classpath=""
+
+for line in $basedir/../../lib/*.jar
+do
+    classpath="$classpath:$line"
+done
+
+java -cp $classpath:$basedir/../../build/jar/bvira-tool.jar bvira.Tool $*
+
+
+

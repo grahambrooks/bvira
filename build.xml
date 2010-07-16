@@ -158,9 +158,9 @@
             </section>
         </manifest>
         <compile.source src.dir="${tool.src.dir}" dest.dir="${jar.dir}"
-                        jar.name="${ant.project.name}.tool.jar" manifest="${manifest.file}"/>
+                        jar.name="${ant.project.name}-tool.jar" manifest="${manifest.file}"/>
         <compile.source src.dir="${tool.test.dir}" dest.dir="${jar.dir}"
-                        jar.name="${ant.project.name}.tool.test.jar" manifest="${manifest.file}"
+                        jar.name="${ant.project.name}-tool-test.jar" manifest="${manifest.file}"
                         classpathref="test.classpath"/>
     </target>
 
@@ -224,11 +224,11 @@
 
     <target name="package">
         <mkdir dir="${dist.dir}"/>
-        <war destfile="${dist.dir}/bvira.war" webxml="sample/web/WEB-INF/web.xml" manifest="${manifest.file}">
+        <war destfile="${dist.dir}/bvira-sample.war" webxml="sample/web/WEB-INF/web.xml" manifest="${manifest.file}">
             <lib dir="lib/run"/>
             <lib dir="${jar.dir}">
                 <include name="*.jar"/>
-                <exclude name="*.test.jar"/>
+                <exclude name="*-test.jar"/>
             </lib>
             <fileset dir="sample/web" casesensitive="yes">
                 <exclude name="WEB-INF/web.xml"/>
@@ -316,6 +316,10 @@
         </java>
     </target>
 
+    <!--
+     Hack to set the ci-build property before launching into that build. There
+     is probably a better way to do this or the property value could be passed on the command line.
+    -->
     <target name="ci">
         <property name="ci-build" value="true"/>
         <echo message="ci-build property is ${ci-build}"/>

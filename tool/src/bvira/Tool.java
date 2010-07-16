@@ -12,6 +12,11 @@ public class Tool {
     private final PrintStream outputStream;
     private FileSystem fileSystem;
     private final Map<String, Command> commands;
+    static final String bannerText = "Bvira - Java web application framework Version 0.1\n\n";
+    static String usageInstructions = "usage" +
+            "\n\n\tbvira [command] parameters" +
+            "\n\ncommands" +
+            "\n   create <project>   Creates a new project with the given name in the current working directory";
 
     interface Command {
 
@@ -38,9 +43,6 @@ public class Tool {
         }
     };
 
-    public static String usageInstructions = "bvira [command] parameters" +
-            "\n\ncommands" +
-            "\n   create <project>   Creates a new project with the given name in the current working directory";
 
     public Tool(PrintStream outputStream, FileSystem fileSystem) {
         this.outputStream = outputStream;
@@ -64,7 +66,7 @@ public class Tool {
 
             commands.get(commandName).execute(fileSystem, args);
         } else {
-            outputStream.print("Bvira\n\n");
+            outputStream.print(bannerText);
             outputStream.print(usageInstructions);
         }
     }

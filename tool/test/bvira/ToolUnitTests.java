@@ -28,7 +28,7 @@ public class ToolUnitTests {
         tool.execute(Arrays.<String>asList());
         String content = baos.toString();
 
-        assertThat(content, is("Bvira\n\n" + Tool.usageInstructions));
+        assertThat(content, is(Tool.bannerText + Tool.usageInstructions));
     }
 
     @Test
