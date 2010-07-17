@@ -46,4 +46,17 @@ public class ToolUnitTests {
         verify(fileSystem).mkdir("sample" + File.separator + "lib");
         verify(fileSystem).mkdir("sample" + File.separator + "tools");
     }
+
+    @Test
+    public void createCommandCopiesTools() {
+        FileSystem fileSystem = mock(FileSystem.class);
+        PrintStream printStream = mock(PrintStream.class);
+
+        Tool tool = new Tool(printStream, fileSystem);
+
+        LinkedList<String> args = new LinkedList<String>(Arrays.asList("create", "sample"));
+        tool.execute(args);
+
+        verify(fileSystem).copy("template" + File.separator + "tools", "sample" + File.separator + "tools");
+    }
 }

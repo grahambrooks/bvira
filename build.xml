@@ -316,12 +316,6 @@
         </java>
     </target>
 
-    <!--
-     Hack to set the ci-build property before launching into that build. There
-     is probably a better way to do this or the property value could be passed on the command line.
-
-    -->
-
     <target  name="ci-property-setup">
         <property name="ci-build" value="true"/>
         <echo message="ci-build property is ${ci-build}"/>

@@ -16,7 +16,8 @@ public class Tool {
     static String usageInstructions = "usage" +
             "\n\n\tbvira [command] parameters" +
             "\n\ncommands" +
-            "\n   create <project>   Creates a new project with the given name in the current working directory";
+            "\n   create <project>   Creates a new project with the given name in the current working directory" +
+            "\n";
 
     interface Command {
 
@@ -40,6 +41,8 @@ public class Tool {
             for (String folder : folders) {
                 fs.mkdir(args.get(0) + File.separatorChar + folder);
             }
+
+            fs.copy("template/tools", args.get(0) + File.separator + "tools");
         }
     };
 
