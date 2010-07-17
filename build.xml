@@ -319,12 +319,14 @@
     <!--
      Hack to set the ci-build property before launching into that build. There
      is probably a better way to do this or the property value could be passed on the command line.
+
     -->
-    <target name="ci">
+
+    <target  name="ci-property-setup">
         <property name="ci-build" value="true"/>
         <echo message="ci-build property is ${ci-build}"/>
-        <antcall target="ci-internal"/>
     </target>
-    <target name="ci-internal" depends="clean, coverage, findbugs">
+
+    <target name="ci"  depends="clean, ci-property-setup, coverage, findbugs">
     </target>
 </project>
