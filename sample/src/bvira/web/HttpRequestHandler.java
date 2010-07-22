@@ -22,7 +22,7 @@ public class HttpRequestHandler extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private WebApplication application;
 
-    public static Component[] components = {
+    public final static Component[] components = {
             new HomePageComponent(),
             new LoginComponent(),
             new OfficeComponent(),
