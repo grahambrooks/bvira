@@ -66,7 +66,7 @@ public class SimpleLoginAcceptanceTests {
             }
         };
 
-        WebApplication application = new WebApplication(HttpRequestHandler.components, new DefaultContainer(), new StringTemplateFactory(), HttpRequestHandler.services);
+        WebApplication application = new WebApplication(HttpRequestHandler.getComponents(), new DefaultContainer(), new StringTemplateFactory(), HttpRequestHandler.services);
         application.executePresenter(requestContext, responseContext);
 
         SAXBuilder builder = new SAXBuilder();

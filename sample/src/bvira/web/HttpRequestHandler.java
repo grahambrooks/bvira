@@ -17,23 +17,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HttpRequestHandler extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private WebApplication application;
 
-    public final static Component[] components = {
-            new HomePageComponent(),
-            new LoginComponent(),
-            new OfficeComponent(),
-    };
 
     public static Class[] services = {
             StubOfficeFinder.class
     };
 
+    private static final List<Component> components = new ArrayList<Component>() {{
+        add(new HomePageComponent());
+        add(new LoginComponent());
+        add(new OfficeComponent());
+    }};
+
+
     public void init(ServletConfig servletConfig) throws ServletException {
         super.init(servletConfig);
+
+
         application = new WebApplication(components, new DefaultContainer(), new StringTemplateFactory(), services);
     }
 
@@ -80,5 +86,9 @@ public class HttpRequestHandler extends HttpServlet {
             log(requestUri.toString(), error);
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
+    }
+
+    public static Iterable<Component> getComponents() {
+        return components;
     }
 }

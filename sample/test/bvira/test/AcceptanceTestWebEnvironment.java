@@ -28,7 +28,7 @@ public class AcceptanceTestWebEnvironment extends WebEnvironment {
     private String responseText;
 
     public AcceptanceTestWebEnvironment() {
-        application = new WebApplication(HttpRequestHandler.components, new DefaultContainer(), new StringTemplateFactory(), HttpRequestHandler.services);
+        application = new WebApplication(HttpRequestHandler.getComponents(), new DefaultContainer(), new StringTemplateFactory(), HttpRequestHandler.services);
 
     }
 

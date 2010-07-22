@@ -68,7 +68,7 @@ public class SimpleHomePageAcceptanceTests {
             }
         };
 
-        WebApplication webApplication = new WebApplication(HttpRequestHandler.components, new DefaultContainer(), new StringTemplateFactory(), HttpRequestHandler.services);
+        WebApplication webApplication = new WebApplication(HttpRequestHandler.getComponents(), new DefaultContainer(), new StringTemplateFactory(), HttpRequestHandler.services);
 
         webApplication.executePresenter(requestContext, responseContext);
 
