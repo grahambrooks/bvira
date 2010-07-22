@@ -1,6 +1,7 @@
 require 'java'
-require 'build/jar/bvira.jar'
-require 'build/jar/bvira.test.jar'
+require 'build/jar/bvira-core.jar'
+require 'build/jar/bvira-sample.jar'
+require 'build/jar/bvira-sample-test.jar'
 
 env = Java::BviraTest::WorkflowTestWebEnvironment.new
 # Java::BviraTest::WebEnvironment.setInstance(env)

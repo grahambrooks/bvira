@@ -25,9 +25,9 @@ public class HttpRequestHandler extends HttpServlet {
     private WebApplication application;
 
 
-    public static Class[] services = {
-            StubOfficeFinder.class
-    };
+    public static final List<Class> services = new ArrayList<Class>() {{
+            add(StubOfficeFinder.class);
+    }};
 
     private static final List<Component> components = new ArrayList<Component>() {{
         add(new HomePageComponent());
@@ -90,5 +90,9 @@ public class HttpRequestHandler extends HttpServlet {
 
     public static Iterable<Component> getComponents() {
         return components;
+    }
+
+    public static Iterable<Class> getServices() {
+        return services;
     }
 }

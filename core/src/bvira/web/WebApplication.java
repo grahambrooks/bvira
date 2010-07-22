@@ -13,7 +13,7 @@ public class WebApplication {
     private final Container container;
     private final RouteMap routeMap;
 
-    public WebApplication(Iterable<Component> components, Container container, TemplateFactory templateFactory, Class[] services) {
+    public WebApplication(Iterable<Component> components, Container container, TemplateFactory templateFactory, Iterable<Class> services) {
         this.container = container;
         this.routeMap = new WebRouteMap();
         this.container.register(this);
