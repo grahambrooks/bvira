@@ -22,7 +22,7 @@ import java.util.List;
 
 public class HttpRequestHandler extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private WebApplication application;
+    private transient WebApplication application;
 
 
     public static final List<Class> services = new ArrayList<Class>() {{
