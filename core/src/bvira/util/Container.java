@@ -8,4 +8,6 @@ public interface Container {
     Container register(Object... objects);
 
     Container transientContainer();
+
+    void dispose();
 }

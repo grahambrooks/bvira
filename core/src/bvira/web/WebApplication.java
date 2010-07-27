@@ -34,6 +34,8 @@ public class WebApplication {
         Class<? extends Presenter> presenterClass = routeMap.findPresenter(requestContext.getRequestUri());
         Presenter presenter = requestContainer.getInstance(presenterClass);
         presenter.present(requestContext, responseContext);
+
+        requestContainer.dispose();
     }
 
     public final void executeCommand(RequestContext requestContext, ResponseContext responseContext) {
@@ -42,5 +44,7 @@ public class WebApplication {
         Class<? extends Command> commandClass = routeMap.findCommand(requestContext.getRequestUri());
         Command command = requestContainer.getInstance(commandClass);
         command.execute(requestContext, responseContext);
+
+        requestContainer.dispose();
     }
 }

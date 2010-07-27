@@ -50,16 +50,6 @@ public class DefaultContainer implements Container {
         picoContainer.dispose();
     }
 
-    public Container registerSpecificInstance(Class<?> interfaceClass, Object instance) {
-        picoContainer.addComponent(interfaceClass, instance);
-        return this;
-    }
-
-    public Container registerSpecificImplementation(Class<?> interfaceClass, Class<?> implementation) {
-        picoContainer.addComponent(interfaceClass, implementation);
-        return this;
-    }
-
     public <T> boolean containsInstance(Class<T> classInstance) {
         try {
             getInstance(classInstance);
