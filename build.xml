@@ -212,6 +212,7 @@
 
     <target name="test.sample" description="Runs JUnit tests" unless="notests">
         <unit.test test.dir="${sample.test.dir}"/>
+        <unit.test test.dir="${sample.test.dir}" test.type="AcceptanceTests"/>
     </target>
 
     <target name="test.core" description="Runs JUnit tests" unless="notests" depends="compile.core">
