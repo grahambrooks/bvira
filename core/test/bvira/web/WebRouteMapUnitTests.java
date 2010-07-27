@@ -5,6 +5,7 @@ import bvira.framework.Presenter;
 import bvira.framework.RequestContext;
 import bvira.framework.RequestUri;
 import bvira.framework.ResponseContext;
+import bvira.util.NotFoundException;
 import org.junit.Test;
 
 import static org.junit.Assert.assertSame;
@@ -68,5 +69,13 @@ public class WebRouteMapUnitTests {
         map.registerRoute(new WebRoute("route"), ACommand.class);
 
         assertSame(ACommand.class, map.findCommand(new RequestUri("route", "")));
+    }
+
+    @Test(expected= NotFoundException.class)
+    public void routeMapThrowsExceptionIfNoRouteFound()
+    {
+        WebRouteMap map = new WebRouteMap();
+        
+        map.findPresenter(new RequestUri("route", ""));
     }
 }
