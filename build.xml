@@ -254,7 +254,7 @@
     <target name="instrument" depends="compile">
         <mkdir dir="${instrumented.dir}"/>
         <cobertura-instrument todir="${instrumented.dir}" datafile="${build.dir}/cobertura.ser">
-            <fileset dir="${jar.dir}" includes="*.jar"/>
+            <fileset dir="${jar.dir}" includes="*.jar" excludes="*test.jar"/>
         </cobertura-instrument>
     </target>
 
