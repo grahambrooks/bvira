@@ -15,7 +15,7 @@ public class WebRequestContext implements RequestContext {
     private final RequestUri requestUri;
     private final Parameters parameters;
 
-    public WebRequestContext(ContextPath contextPath, ContextRoot contextRoot, RequestUri requestUri, Parameters parameters) {
+    private WebRequestContext(ContextPath contextPath, ContextRoot contextRoot, RequestUri requestUri, Parameters parameters) {
         this.contextPath = contextPath;
         this.contextRoot = contextRoot;
         this.requestUri = requestUri;
