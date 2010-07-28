@@ -1,7 +1,12 @@
 package bvira.test;
 
 import bvira.framework.Navigable;
-import bvira.test.abstraction.*;
+import bvira.test.abstraction.DriverAdaptor;
+import bvira.test.abstraction.For;
+import bvira.test.abstraction.HTTPInteraction;
+import bvira.test.abstraction.HtmlPage;
+import bvira.test.abstraction.Navigator;
+import bvira.test.abstraction.WebDriverAdaptor;
 import bvira.webserver.WebServer;
 import intercept.configuration.ProxyConfig;
 import intercept.logging.ApplicationLog;
@@ -58,7 +63,7 @@ public class WorkflowTestWebEnvironment extends WebEnvironment implements Closea
     }
 
     public WebEnvironment start() {
-        proxyServer = startProxy(PROXY_PORT);
+//        proxyServer = startProxy(PROXY_PORT);
 
         startBrowser(PROXY_PORT);
 
@@ -70,9 +75,9 @@ public class WorkflowTestWebEnvironment extends WebEnvironment implements Closea
     private void startBrowser(int proxyPort) {
         FirefoxProfile profile = new FirefoxProfile();
 
-        profile.setPreference("network.proxy.http", "localhost");
-        profile.setPreference("network.proxy.http_port", proxyPort);
-        profile.setPreference("network.proxy.type", 1);
+//        profile.setPreference("network.proxy.http", "localhost");
+//        profile.setPreference("network.proxy.http_port", proxyPort);
+//        profile.setPreference("network.proxy.type", 1);
 
         driver = new FirefoxDriver(profile);
     }
@@ -93,9 +98,13 @@ public class WorkflowTestWebEnvironment extends WebEnvironment implements Closea
     }
 
     public void stop() {
+        System.err.println("Shutting down web server");
         stopWebServer();
+        System.err.println("Closing the driver");
         stopDriver();
+        System.err.println("Stopping the proxy server");
         stopProxyServer();
+        System.err.println("Environment closed");
     }
 
     public WebEnvironment clickLink(String linkText) {
@@ -140,7 +149,9 @@ public class WorkflowTestWebEnvironment extends WebEnvironment implements Closea
     }
 
     private void stopProxyServer() {
-        InterceptProxy.shutdown();
-        proxyServer = null;
+        if (proxyServer != null) {
+            InterceptProxy.shutdown();
+            proxyServer = null;
+        }
     }
 }
