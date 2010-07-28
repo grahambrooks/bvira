@@ -24,4 +24,8 @@ public class To implements Navigator {
     public void navigate(Navigable navigable) {
         navigable.setPath(path);
     }
+
+    public static To officeDetailsPage() {
+        return new To("/office/details");
+    }
 }

@@ -4,11 +4,12 @@ import bvira.test.AcceptanceTestRunner;
 import bvira.test.WebEnvironment;
 import bvira.test.abstraction.LoginPage;
 import bvira.test.abstraction.To;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebElement;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 @RunWith(AcceptanceTestRunner.class)
 public class LoginAcceptanceTests {
