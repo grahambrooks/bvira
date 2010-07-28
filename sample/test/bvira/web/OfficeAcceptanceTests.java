@@ -11,7 +11,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 @RunWith(AcceptanceTestRunner.class)
-public class OfficeAceptanceTests {
+public class OfficeAcceptanceTests {
     @Test
     public void pageTitleIsAppropriate() {
         OfficeDetailsPage page = WebEnvironment.getInstance()
