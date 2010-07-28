@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ResourceContentType {
-
     private static final Map<String, String> ContentTypes = new HashMap<String, String>() {{
         put("txt", "text/text");
     }};
@@ -16,6 +15,7 @@ public class ResourceContentType {
 
     private final String contentType;
     private final String encoding;
+    public static final ResourceContentType TEXT = new ResourceContentType("text/text", DEFAULT_ENCODING);
 
     public ResourceContentType() {
         this(DEFAULT_CONTENT_TYPE, DEFAULT_ENCODING);
