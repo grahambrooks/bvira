@@ -3,6 +3,7 @@ package bvira.web;
 import bvira.framework.ParameterName;
 import bvira.framework.RequestContext;
 import bvira.framework.RequestUri;
+import bvira.util.Maps;
 import org.junit.Test;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,9 +22,8 @@ public class WebRequestContextUnitTests {
         doReturn("context").when(request).getContextPath();
         doReturn("root").when(request).getServerName();
         doReturn(8080).when(request).getServerPort();
-        Map params = new HashMap();
-        params.put("foo", "bar1");
-        doReturn(params).when(request).getParameterMap();
+        Map requestParameters  = Maps.create("foo", "bar1");
+        doReturn(requestParameters).when(request).getParameterMap();
         RequestContext requestContext = WebRequestContext.create(request, new RequestUri("/some/path", "foo=bar"));
 
         assertThat(requestContext.getContextPath().getValue(), is("context"));
