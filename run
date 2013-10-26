@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ANT_HOME=$PWD/tools/apache-ant-1.7.1
+ANT_HOME=$PWD/tools/apache-ant-1.8.2
 
 $ANT_HOME/bin/ant $@
 

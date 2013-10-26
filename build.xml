@@ -86,7 +86,7 @@
             <mkdir dir="@{classes.dir}"/>
 
             <javac srcdir="@{src.dir}" destdir="@{classes.dir}" classpathref="@{classpathref}"
-                   debug="@{debug}" target="1.5"/>
+                   debug="@{debug}" source="1.6" target="1.6"/>
 
             <copy todir="@{classes.dir}" includeemptydirs="no">
                 <fileset dir="@{src.dir}" excludes="**/*.java"/>
