@@ -38,3 +38,7 @@ Bvira using stringtemplate for content templates. StringTemplate (http://www.str
 
 Capabilities like dependency injection are placed behind a facade that only exposes the functionality required by the application. Currently dependency injection is provided by PicoContainer (http://picocontainer.codehaus.org) but because it is behind application classes it can be quite easily replaced as additional requirements are identified.
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/grahambrooks/bvira/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
