@@ -1,5 +1,7 @@
 # bvira - sample web application
 
+This repository is no longer maintained (Archived)
+
 Bvira is a reference/example web application modeled on an extremely
 successful project. The application architecture exhibited a very
 clean separation of concerns and overall the project demonstrated how
